@@ -1,96 +1,74 @@
-<<<<<<< HEAD
 "use client";
 
-import { useMemo, useState } from "react";
-import type { Repo } from "../lib/github";
+import { useState } from "react";
 import ProjectCard from "./ProjectCard";
+import type { Repo } from "../lib/github";
+import { motion, AnimatePresence } from "framer-motion";
+import SpaceshipLoader from "./SpaceshipLoader";
 
 type Props = {
   repos: Repo[];
 };
 
+const INITIAL_COUNT = 6;
+const LOAD_STEP = 3;
+
 export default function ProjectsFilter({ repos }: Props) {
-  const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+  const [loading, setLoading] = useState(false);
 
-  const filteredRepos = useMemo(() => {
-    if (!search) return repos;
+  const visibleRepos = repos.slice(0, visibleCount);
 
-    return repos.filter((repo) =>
-      repo.language?.toLowerCase().includes(search.toLowerCase()),
-    );
-  }, [repos, search]);
+  function handleLoadMore() {
+    if (visibleCount >= repos.length) {
+      setVisibleCount(INITIAL_COUNT);
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + LOAD_STEP, repos.length));
+      setLoading(false);
+    }, 1200);
+  }
+
+  const isAllVisible = visibleCount >= repos.length;
 
   return (
     <>
-      {/* 🔍 SEARCH */}
-      <div className="mb-12 flex justify-center">
-        <input
-          type="text"
-          placeholder="Filtrar por tecnologia (ex: React, Next, Node...)"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-md rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white placeholder-white/40 backdrop-blur focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+      {/* GRID (INALTERADO) */}
+      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {visibleRepos.map((repo) => (
+          <ProjectCard key={repo.id} repo={repo} />
+        ))}
       </div>
 
-      {/* 📦 GRID */}
-      {filteredRepos.length === 0 ? (
-        <p className="text-center text-white/50">Nenhum projeto encontrado</p>
-      ) : (
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredRepos.map((repo) => (
-            <ProjectCard key={repo.id} repo={repo} />
-          ))}
+      {/* LOADER */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            className="mt-16 flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <SpaceshipLoader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* BOTÃO */}
+      {!loading && repos.length > INITIAL_COUNT && (
+        <div className="mt-16 text-center">
+          <button
+            onClick={handleLoadMore}
+            className="rounded-xl bg-cyan-500 px-8 py-3 text-sm font-semibold text-black transition hover:bg-cyan-400"
+          >
+            {isAllVisible ? "Mostrar menos" : "Ver mais projetos"}
+          </button>
         </div>
       )}
     </>
   );
 }
-=======
-"use client";
-
-import { useMemo, useState } from "react";
-import type { Repo } from "../lib/github";
-import ProjectCard from "./ProjectCard";
-
-type Props = {
-  repos: Repo[];
-};
-
-export default function ProjectsFilter({ repos }: Props) {
-  const [search, setSearch] = useState("");
-
-  const filteredRepos = useMemo(() => {
-    if (!search) return repos;
-
-    return repos.filter((repo) =>
-      repo.language?.toLowerCase().includes(search.toLowerCase()),
-    );
-  }, [repos, search]);
-
-  return (
-    <>
-      {/* 🔍 SEARCH */}
-      <div className="mb-12 flex justify-center">
-        <input
-          type="text"
-          placeholder="Filtrar por tecnologia (ex: React, Next, Node...)"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-md rounded-xl border border-white/10 bg-black/40 px-5 py-3 text-sm text-white placeholder-white/40 backdrop-blur focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
-      </div>
-
-      {filteredRepos.length === 0 ? (
-        <p className="text-center text-white/50">Nenhum projeto encontrado</p>
-      ) : (
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredRepos.map((repo) => (
-            <ProjectCard key={repo.id} repo={repo} />
-          ))}
-        </div>
-      )}
-    </>
-  );
-}
->>>>>>> 41a3204 (alteracao de componentes)
