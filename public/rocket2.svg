@@ -1,0 +1,68 @@
+<svg
+  width="120"
+  height="120"
+  viewBox="0 0 120 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Corpo -->
+  <path
+    d="M60 10C45 30 40 55 40 75C40 95 60 110 60 110C60 110 80 95 80 75C80 55 75 30 60 10Z"
+    fill="url(#bodyGradient)"
+  />
+
+  <!-- Janela -->
+  <circle
+    cx="60"
+    cy="55"
+    r="8"
+    fill="#0F172A"
+    stroke="#38BDF8"
+    stroke-width="2"
+  />
+
+  <!-- Asa esquerda -->
+  <path
+    d="M40 75L20 90L40 90V75Z"
+    fill="#7C3AED"
+  />
+
+  <!-- Asa direita -->
+  <path
+    d="M80 75L100 90L80 90V75Z"
+    fill="#7C3AED"
+  />
+
+  <!-- Fogo -->
+  <path
+    d="M60 110C55 118 65 118 60 125C75 115 70 100 60 110Z"
+    fill="url(#fireGradient)"
+  />
+
+  <!-- Gradientes -->
+  <defs>
+    <linearGradient
+      id="bodyGradient"
+      x1="40"
+      y1="10"
+      x2="80"
+      y2="110"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#38BDF8" />
+      <stop offset="1" stop-color="#7C3AED" />
+    </linearGradient>
+
+    <linearGradient
+      id="fireGradient"
+      x1="60"
+      y1="110"
+      x2="60"
+      y2="125"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#FACC15" />
+      <stop offset="1" stop-color="#F97316" />
+    </linearGradient>
+  </defs>
+</svg>
