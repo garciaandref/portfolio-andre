@@ -1,6 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+
+const MotionLink = motion(Link);
 
 export default function Hero() {
   return (
@@ -24,12 +27,13 @@ export default function Hero() {
         performáticas e impactantes.
       </motion.p>
 
-      <motion.button
+      <MotionLink
+        href="#projects"
         whileHover={{ scale: 1.1 }}
-        className="mt-10 rounded-full border border-cyan-400 px-8 py-3 text-sm tracking-widest uppercase hover:bg-cyan-400 hover:text-black transition"
+        className="mt-10 inline-block rounded-full border border-cyan-400 px-8 py-3 text-sm tracking-widest uppercase transition hover:bg-cyan-400 hover:text-black"
       >
         Ver Projetos
-      </motion.button>
+      </MotionLink>
     </section>
   );
 }
