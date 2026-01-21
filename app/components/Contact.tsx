@@ -52,6 +52,8 @@ export default function Contact() {
           <div className="relative flex flex-wrap justify-center gap-6">
             <a
               href="mailto:andrefgarcia094@gmail.com"
+              title=""
+              aria-label="Enviar email"
               className="group flex items-center gap-3 rounded-xl border border-white/10 px-6 py-3 text-white/80 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               <Mail className="h-5 w-5" />
@@ -61,16 +63,21 @@ export default function Contact() {
             <a
               href="https://www.linkedin.com/in/garciaandref"
               target="_blank"
+              rel="noopener noreferrer"
+              title=""
+              aria-label="LinkedIn"
               className="group flex items-center gap-3 rounded-xl border border-white/10 px-6 py-3 text-white/80 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               <Linkedin className="h-5 w-5" />
               LinkedIn
             </a>
 
-            {/* GITHUB */}
             <a
               href="https://github.com/garciaandref"
               target="_blank"
+              rel="noopener noreferrer"
+              title=""
+              aria-label="GitHub"
               className="group flex items-center gap-3 rounded-xl border border-white/10 px-6 py-3 text-white/80 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               <Github className="h-5 w-5" />
@@ -80,6 +87,9 @@ export default function Contact() {
             <a
               href="https://wa.me/5516992143319"
               target="_blank"
+              rel="noopener noreferrer"
+              title=""
+              aria-label="WhatsApp"
               className="group flex items-center gap-3 rounded-xl border border-white/10 px-6 py-3 text-white/80 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               <MessageCircle className="h-5 w-5" />
